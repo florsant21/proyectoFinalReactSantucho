@@ -5,12 +5,12 @@ const Footer = () => {
           <div className="row">
             <div className="col-md-4 mb-3">
               <h5>Contacto</h5>
-              <p>Email: contacto@tienda.com</p>
+              <p>Email: stouch@tienda.com</p>
               <p>Teléfono: +54 9 1234 567890</p>
             </div>
             <div className="col-md-4 mb-3">
               <h5>Domicilio</h5>
-              <p>Avenida Principal 123, Ciudad, País</p>
+              <p>Avenida del Libertador 912, Capital Federal, Argentina</p>
             </div>
             <div className="col-md-4 mb-3">
               <h5>&copy; 2024 Tienda</h5>

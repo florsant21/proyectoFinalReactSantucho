@@ -22,6 +22,7 @@ const Home = () => {
               src={product.img}
               alt={product.title}
               className="card-img-top"
+              src={product.img}
             />
             <div className="card-body">
               <h5 className="card-title">{product.title}</h5>
