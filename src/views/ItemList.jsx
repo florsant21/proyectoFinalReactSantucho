@@ -26,7 +26,7 @@ const ItemList = () => {
           <img src={product.img} alt={product.title} />
           <h3>{product.title}</h3>
           <p>${product.price}</p>
-          <button>Ver detalle</button>
+          <button>Añadir al carrito</button>
         </div>
       ))}
     </div>
