@@ -8,13 +8,39 @@ const ItemDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const { addItem } = useCart();
+  const { addItem, getItemQuantity } = useCart();
 
   useEffect(() => {
     fetchProductById(id).then(setProduct).catch(console.error);
   }, [id]);
 
   const handleAddToCart = () => {
+    const currentQuantityInCart = getItemQuantity(product.id);
+
+    if (!product.stock) {
+      Swal.fire({
+        icon: "error",
+        title: "Sin stock",
+        text: "Este producto no está disponible actualmente.",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      return;
+    }
+
+    if (currentQuantityInCart + quantity > product.stock) {
+      Swal.fire({
+        icon: "warning",
+        title: "Stock insuficiente",
+        text: `Solo puedes agregar ${
+          product.stock - currentQuantityInCart
+        } unidades más.`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      return;
+    }
+
     addItem(product, quantity);
 
     Swal.fire({
@@ -29,6 +55,9 @@ const ItemDetail = () => {
   if (!product) {
     return <p className="text-center mt-5">Cargando...</p>;
   }
+
+  const currentQuantityInCart = getItemQuantity(product.id);
+  const maxQuantityAvailable = product.stock - currentQuantityInCart;
 
   return (
     <div className="container mt-4 mb-5">
@@ -51,6 +80,9 @@ const ItemDetail = () => {
               <p className="card-text">
                 <strong>Precio:</strong> ${product.price}
               </p>
+              <p className="card-text">
+                <strong>Stock disponible:</strong> {product.stock}
+              </p>
               <div className="d-flex align-items-center justify-content-center mb-3">
                 <label htmlFor="quantity" className="me-2">
                   Cantidad:
@@ -59,12 +91,18 @@ const ItemDetail = () => {
                   type="number"
                   id="quantity"
                   min="1"
+                  max={maxQuantityAvailable}
                   value={quantity}
                   onChange={(e) => setQuantity(Number(e.target.value))}
                   className="form-control w-25"
+                  disabled={!product.stock || maxQuantityAvailable <= 0}
                 />
               </div>
-              <button className="btn btn-primary" onClick={handleAddToCart}>
+              <button
+                className="btn btn-primary"
+                onClick={handleAddToCart}
+                disabled={!product.stock || maxQuantityAvailable <= 0}
+              >
                 Agregar al carrito
               </button>
             </div>
