@@ -27,7 +27,7 @@ const Home = () => {
               <h5 className="card-title">{product.title}</h5>
               <p className="card-text">${product.price}</p>
               <Link to={`/item/${product.id}`} className="btn btn-primary">
-                Añadir al carrito
+                Ver detalle
               </Link>
             </div>
           </div>

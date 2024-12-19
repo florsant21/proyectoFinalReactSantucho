@@ -1,5 +1,6 @@
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { fetchProducts, fetchProductsByCategory } from "../services/firebase";
 
 const ItemList = () => {
@@ -20,11 +21,11 @@ const ItemList = () => {
 
   return (
     <div className="container mt-4 mb-5">
-      <h2 className="mb-4">
+      <h1 className="mb-4 text-center">
         {category ? `Productos de ${category}` : "Todos los productos"}
-      </h2>
+      </h1>
       {products.length > 0 ? (
-        <div className="row row-cols-2 row-cols-md-4 g-4">
+        <div className="row row-cols-2 row-cols-md-4 g-4 text-center">
           {products.map((product) => (
             <div className="col" key={product.id}>
               <div className="card h-100">
@@ -36,7 +37,9 @@ const ItemList = () => {
                 <div className="card-body">
                   <h5 className="card-title">{product.title}</h5>
                   <p className="card-text">${product.price}</p>
-                  <button className="btn btn-primary">Añadir al carrito</button>
+                  <Link to={`/item/${product.id}`} className="btn btn-primary">
+                    Ver detalle
+                  </Link>
                 </div>
               </div>
             </div>

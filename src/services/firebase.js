@@ -1,4 +1,4 @@
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs, query, where, doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/config";
 
 export const fetchProducts = async () => {
@@ -15,7 +15,7 @@ export const fetchProductsByCategory = async (category) => {
 };
 
 export const fetchProductById = async (id) => {
-  const docRef = doc(db, "products", id);
+  const docRef = doc(db, "item", id);
   const docSnap = await getDoc(docRef);
   if (docSnap.exists()) {
     return { id: docSnap.id, ...docSnap.data() };

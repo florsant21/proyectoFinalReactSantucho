@@ -1,6 +1,12 @@
 import { Link } from "react-router-dom";
+import { useCart } from "../context/CartContext";
+import { FaShoppingCart } from "react-icons/fa";
 
 const NavBar = () => {
+  const { cart } = useCart();
+
+  const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
@@ -42,7 +48,10 @@ const NavBar = () => {
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/cart">
-                Carrito
+                <FaShoppingCart />{" "}
+                {totalItems > 0 && (
+                  <span className="badge bg-danger ms-2">{totalItems}</span>
+                )}
               </Link>
             </li>
           </ul>
