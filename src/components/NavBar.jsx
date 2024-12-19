@@ -12,9 +12,9 @@ const NavBar = () => {
     <div className="container-fluid">
       <Link className="navbar-brand" to="/">
         <img
-          src="../public/icono.png" // Ruta a tu imagen
+          src="/public/icono.png"
           alt="Tienda"
-          style={{ width: "30px", height: "40px" }} // Ajusta el tamaño según sea necesario
+          style={{ width: "30px", height: "40px" }} 
         />
       </Link>
       <button
