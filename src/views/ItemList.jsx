@@ -17,18 +17,34 @@ const ItemList = () => {
       });
     }
   }, [category]);
-  
 
   return (
-    <div className={`item-list ${category}`}>
-      {products.map((product) => (
-        <div key={product.id} className="product-card">
-          <img src={product.img} alt={product.title} />
-          <h3>{product.title}</h3>
-          <p>${product.price}</p>
-          <button>Añadir al carrito</button>
+    <div className="container mt-4 mb-5">
+      <h2 className="mb-4">
+        {category ? `Productos de ${category}` : "Todos los productos"}
+      </h2>
+      {products.length > 0 ? (
+        <div className="row row-cols-2 row-cols-md-4 g-4">
+          {products.map((product) => (
+            <div className="col" key={product.id}>
+              <div className="card h-100">
+                <img
+                  src={product.img}
+                  alt={product.title}
+                  className="card-img-top"
+                />
+                <div className="card-body">
+                  <h5 className="card-title">{product.title}</h5>
+                  <p className="card-text">${product.price}</p>
+                  <button className="btn btn-primary">Añadir al carrito</button>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
+      ) : (
+        <p>No hay productos disponibles.</p>
+      )}
     </div>
   );
 };
